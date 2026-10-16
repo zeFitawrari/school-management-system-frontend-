@@ -7,6 +7,7 @@ import { RootLayout } from '@/app/RootLayout';
 import { LoginPage, ProtectedRoute } from '@/features/auth';
 import { ParentDetailPage, ParentEditPage, ParentListPage, ParentRegistrationPage } from '@/features/parents';
 import { StudentListPage, StudentRegistrationPage, StudentDetailPage } from '@/features/students';
+import { TutorDetailPage, TutorEditPage, TutorListPage, TutorRegistrationPage } from '@/features/tutors';
 import { UserListPage } from '@/features/users';
 import { DashboardLayout } from '@/layouts/DashboardLayout';
 import type { RouteObject } from 'react-router-dom';
@@ -32,7 +33,6 @@ const PlaceholderPage = lazy(() => import('@/app/RoutePlaceholder'));
 const moduleRoutes: ModuleRoute[] = [
   { path: 'app/dashboard', title: 'Dashboard', requiredPermissions: ['dashboard.read'] },
   // { path: 'app/students', title: 'Students', requiredPermissions: ['students.read'] },
-  { path: 'app/tutors', title: 'Tutors & staff', requiredPermissions: ['tutors.read'] },
   { path: 'app/vacancies', title: 'Vacancies', requiredPermissions: ['vacancies.read'] },
   { path: 'app/courses', title: 'Courses', requiredPermissions: ['courses.read'] },
   { path: 'app/curriculum', title: 'Curriculum', requiredPermissions: ['courses.read'] },
@@ -177,6 +177,42 @@ export const appRoutes: RouteObject[] = [
               </ProtectedRoute>
             ),
             handle: { title: 'Edit parent', requiredPermissions: ['parents.update'] } satisfies RouteHandle,
+          },
+          {
+            path: 'app/tutors',
+            element: (
+              <ProtectedRoute requiredPermissions={['tutors.read']}>
+                <TutorListPage />
+              </ProtectedRoute>
+            ),
+            handle: { title: 'Tutors & staff', requiredPermissions: ['tutors.read'] } satisfies RouteHandle,
+          },
+          {
+            path: 'app/tutors/new',
+            element: (
+              <ProtectedRoute requiredPermissions={['tutors.create']}>
+                <TutorRegistrationPage />
+              </ProtectedRoute>
+            ),
+            handle: { title: 'Add tutor', requiredPermissions: ['tutors.create'] } satisfies RouteHandle,
+          },
+          {
+            path: 'app/tutors/:tutorId',
+            element: (
+              <ProtectedRoute requiredPermissions={['tutors.read']}>
+                <TutorDetailPage />
+              </ProtectedRoute>
+            ),
+            handle: { title: 'Tutor profile', requiredPermissions: ['tutors.read'] } satisfies RouteHandle,
+          },
+          {
+            path: 'app/tutors/:tutorId/edit',
+            element: (
+              <ProtectedRoute requiredPermissions={['tutors.update']}>
+                <TutorEditPage />
+              </ProtectedRoute>
+            ),
+            handle: { title: 'Edit tutor', requiredPermissions: ['tutors.update'] } satisfies RouteHandle,
           },
           ...moduleRouteObjects,
           {
