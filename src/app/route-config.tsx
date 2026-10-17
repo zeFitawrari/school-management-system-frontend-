@@ -10,6 +10,9 @@ import { StudentListPage, StudentRegistrationPage, StudentDetailPage } from '@/f
 import { TutorDetailPage, TutorEditPage, TutorListPage, TutorRegistrationPage } from '@/features/tutors';
 import { VacancyDetailPage, VacancyEditPage, VacancyListPage, VacancyRegistrationPage } from '@/features/vacancies';
 import { AcademicYearDetailPage, AcademicYearEditPage, AcademicYearListPage, AcademicYearRegistrationPage } from '@/features/academic-years';
+import { CourseDetailPage, CourseEditPage, CourseListPage, CourseRegistrationPage } from '@/features/courses';
+import { CurriculumDetailPage, CurriculumEditPage, CurriculumListPage, CurriculumRegistrationPage } from '@/features/curriculum';
+import { PackageDetailPage, PackageEditPage, PackageListPage, PackageRegistrationPage } from '@/features/packages';
 import { UserListPage } from '@/features/users';
 import { DashboardLayout } from '@/layouts/DashboardLayout';
 import type { RouteObject } from 'react-router-dom';
@@ -35,10 +38,7 @@ const PlaceholderPage = lazy(() => import('@/app/RoutePlaceholder'));
 const moduleRoutes: ModuleRoute[] = [
   { path: 'app/dashboard', title: 'Dashboard', requiredPermissions: ['dashboard.read'] },
   // { path: 'app/students', title: 'Students', requiredPermissions: ['students.read'] },
-  { path: 'app/courses', title: 'Courses', requiredPermissions: ['courses.read'] },
-  { path: 'app/curriculum', title: 'Curriculum', requiredPermissions: ['courses.read'] },
   { path: 'app/groups', title: 'Groups', requiredPermissions: ['groups.read'] },
-  { path: 'app/packages', title: 'Packages', requiredPermissions: ['packages.read'] },
   { path: 'app/enrollments', title: 'Enrollments', requiredPermissions: ['enrollments.read'] },
   { path: 'app/scheduling', title: 'Timetable', requiredPermissions: ['scheduling.read'] },
   { path: 'app/attendance', title: 'Attendance', requiredPermissions: ['attendance.read'] },
@@ -286,6 +286,114 @@ export const appRoutes: RouteObject[] = [
               </ProtectedRoute>
             ),
             handle: { title: 'Edit academic year', requiredPermissions: ['academics.years.manage'] } satisfies RouteHandle,
+          },
+          {
+            path: 'app/courses',
+            element: (
+              <ProtectedRoute requiredPermissions={['courses.read']}>
+                <CourseListPage />
+              </ProtectedRoute>
+            ),
+            handle: { title: 'Courses', requiredPermissions: ['courses.read'] } satisfies RouteHandle,
+          },
+          {
+            path: 'app/courses/new',
+            element: (
+              <ProtectedRoute requiredPermissions={['courses.manage']}>
+                <CourseRegistrationPage />
+              </ProtectedRoute>
+            ),
+            handle: { title: 'Add course', requiredPermissions: ['courses.manage'] } satisfies RouteHandle,
+          },
+          {
+            path: 'app/courses/:courseId',
+            element: (
+              <ProtectedRoute requiredPermissions={['courses.read']}>
+                <CourseDetailPage />
+              </ProtectedRoute>
+            ),
+            handle: { title: 'Course profile', requiredPermissions: ['courses.read'] } satisfies RouteHandle,
+          },
+          {
+            path: 'app/courses/:courseId/edit',
+            element: (
+              <ProtectedRoute requiredPermissions={['courses.manage']}>
+                <CourseEditPage />
+              </ProtectedRoute>
+            ),
+            handle: { title: 'Edit course', requiredPermissions: ['courses.manage'] } satisfies RouteHandle,
+          },
+          {
+            path: 'app/curriculum',
+            element: (
+              <ProtectedRoute requiredPermissions={['curriculum.manage']}>
+                <CurriculumListPage />
+              </ProtectedRoute>
+            ),
+            handle: { title: 'Curriculum', requiredPermissions: ['curriculum.manage'] } satisfies RouteHandle,
+          },
+          {
+            path: 'app/curriculum/new',
+            element: (
+              <ProtectedRoute requiredPermissions={['curriculum.manage']}>
+                <CurriculumRegistrationPage />
+              </ProtectedRoute>
+            ),
+            handle: { title: 'Add curriculum', requiredPermissions: ['curriculum.manage'] } satisfies RouteHandle,
+          },
+          {
+            path: 'app/curriculum/:curriculumId',
+            element: (
+              <ProtectedRoute requiredPermissions={['curriculum.manage']}>
+                <CurriculumDetailPage />
+              </ProtectedRoute>
+            ),
+            handle: { title: 'Curriculum profile', requiredPermissions: ['curriculum.manage'] } satisfies RouteHandle,
+          },
+          {
+            path: 'app/curriculum/:curriculumId/edit',
+            element: (
+              <ProtectedRoute requiredPermissions={['curriculum.manage']}>
+                <CurriculumEditPage />
+              </ProtectedRoute>
+            ),
+            handle: { title: 'Edit curriculum', requiredPermissions: ['curriculum.manage'] } satisfies RouteHandle,
+          },
+          {
+            path: 'app/packages',
+            element: (
+              <ProtectedRoute requiredPermissions={['packages.read']}>
+                <PackageListPage />
+              </ProtectedRoute>
+            ),
+            handle: { title: 'Packages', requiredPermissions: ['packages.read'] } satisfies RouteHandle,
+          },
+          {
+            path: 'app/packages/new',
+            element: (
+              <ProtectedRoute requiredPermissions={['packages.manage']}>
+                <PackageRegistrationPage />
+              </ProtectedRoute>
+            ),
+            handle: { title: 'Add package', requiredPermissions: ['packages.manage'] } satisfies RouteHandle,
+          },
+          {
+            path: 'app/packages/:packageId',
+            element: (
+              <ProtectedRoute requiredPermissions={['packages.read']}>
+                <PackageDetailPage />
+              </ProtectedRoute>
+            ),
+            handle: { title: 'Package profile', requiredPermissions: ['packages.read'] } satisfies RouteHandle,
+          },
+          {
+            path: 'app/packages/:packageId/edit',
+            element: (
+              <ProtectedRoute requiredPermissions={['packages.manage']}>
+                <PackageEditPage />
+              </ProtectedRoute>
+            ),
+            handle: { title: 'Edit package', requiredPermissions: ['packages.manage'] } satisfies RouteHandle,
           },
           ...moduleRouteObjects,
           {

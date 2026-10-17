@@ -16,6 +16,8 @@ const items: NavItem[] = [
   { label: 'Tutors', to: '/app/tutors', permission: 'tutors.read' },
   { label: 'Academic Years', to: '/app/academic-years', permission: 'academics.years.manage' },
   { label: 'Courses', to: '/app/courses', permission: 'courses.read' },
+  { label: 'Curriculum', to: '/app/curriculum', permission: 'curriculum.manage' },
+  { label: 'Packages', to: '/app/packages', permission: 'packages.read' },
   { label: 'Groups', to: '/app/groups', permission: 'groups.read' },
   { label: 'Enrollments', to: '/app/enrollments', permission: 'enrollments.read' },
   { label: 'Timetable', to: '/app/scheduling', permission: 'scheduling.read' },

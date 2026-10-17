@@ -5,6 +5,9 @@ import { tutorHandlers } from '@/tests/mocks/handlers/tutors';
 import { userHandlers } from '@/tests/mocks/handlers/users';
 import { vacancyHandlers } from '@/tests/mocks/handlers/vacancies';
 import { academicYearHandlers } from '@/tests/mocks/handlers/academic-years';
+import { courseHandlers } from '@/tests/mocks/handlers/courses';
+import { curriculumHandlers } from '@/tests/mocks/handlers/curriculum';
+import { packageHandlers } from '@/tests/mocks/handlers/packages';
 
 /**
  * Request handlers follow docs/api-contract.md. One file per domain; domains
@@ -18,4 +21,7 @@ export const handlers = [
   ...userHandlers,
   ...vacancyHandlers,
   ...academicYearHandlers,
+  ...courseHandlers,
+  ...curriculumHandlers,
+  ...packageHandlers,
 ];
