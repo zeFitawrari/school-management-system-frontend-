@@ -13,6 +13,7 @@ import { AcademicYearDetailPage, AcademicYearEditPage, AcademicYearListPage, Aca
 import { CourseDetailPage, CourseEditPage, CourseListPage, CourseRegistrationPage } from '@/features/courses';
 import { CurriculumDetailPage, CurriculumEditPage, CurriculumListPage, CurriculumRegistrationPage } from '@/features/curriculum';
 import { PackageDetailPage, PackageEditPage, PackageListPage, PackageRegistrationPage } from '@/features/packages';
+import { GroupDetailPage, GroupEditPage, GroupListPage, GroupRegistrationPage } from '@/features/groups';
 import { UserListPage } from '@/features/users';
 import { DashboardLayout } from '@/layouts/DashboardLayout';
 import type { RouteObject } from 'react-router-dom';
@@ -394,6 +395,42 @@ export const appRoutes: RouteObject[] = [
               </ProtectedRoute>
             ),
             handle: { title: 'Edit package', requiredPermissions: ['packages.manage'] } satisfies RouteHandle,
+          },
+          {
+            path: 'app/groups',
+            element: (
+              <ProtectedRoute requiredPermissions={['groups.read']}>
+                <GroupListPage />
+              </ProtectedRoute>
+            ),
+            handle: { title: 'Groups', requiredPermissions: ['groups.read'] } satisfies RouteHandle,
+          },
+          {
+            path: 'app/groups/new',
+            element: (
+              <ProtectedRoute requiredPermissions={['groups.manage']}>
+                <GroupRegistrationPage />
+              </ProtectedRoute>
+            ),
+            handle: { title: 'Add group', requiredPermissions: ['groups.manage'] } satisfies RouteHandle,
+          },
+          {
+            path: 'app/groups/:groupId',
+            element: (
+              <ProtectedRoute requiredPermissions={['groups.read']}>
+                <GroupDetailPage />
+              </ProtectedRoute>
+            ),
+            handle: { title: 'Group profile', requiredPermissions: ['groups.read'] } satisfies RouteHandle,
+          },
+          {
+            path: 'app/groups/:groupId/edit',
+            element: (
+              <ProtectedRoute requiredPermissions={['groups.manage']}>
+                <GroupEditPage />
+              </ProtectedRoute>
+            ),
+            handle: { title: 'Edit group', requiredPermissions: ['groups.manage'] } satisfies RouteHandle,
           },
           ...moduleRouteObjects,
           {
