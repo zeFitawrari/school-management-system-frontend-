@@ -14,6 +14,7 @@ import { CourseDetailPage, CourseEditPage, CourseListPage, CourseRegistrationPag
 import { CurriculumDetailPage, CurriculumEditPage, CurriculumListPage, CurriculumRegistrationPage } from '@/features/curriculum';
 import { PackageDetailPage, PackageEditPage, PackageListPage, PackageRegistrationPage } from '@/features/packages';
 import { GroupDetailPage, GroupEditPage, GroupListPage, GroupRegistrationPage } from '@/features/groups';
+import { EnrollmentDetailPage, EnrollmentEditPage, EnrollmentListPage, EnrollmentRegistrationPage } from '@/features/enrollments';
 import { UserListPage } from '@/features/users';
 import { DashboardLayout } from '@/layouts/DashboardLayout';
 import type { RouteObject } from 'react-router-dom';
@@ -431,6 +432,42 @@ export const appRoutes: RouteObject[] = [
               </ProtectedRoute>
             ),
             handle: { title: 'Edit group', requiredPermissions: ['groups.manage'] } satisfies RouteHandle,
+          },
+          {
+            path: 'app/enrollments',
+            element: (
+              <ProtectedRoute requiredPermissions={['enrollments.read']}>
+                <EnrollmentListPage />
+              </ProtectedRoute>
+            ),
+            handle: { title: 'Enrollments', requiredPermissions: ['enrollments.read'] } satisfies RouteHandle,
+          },
+          {
+            path: 'app/enrollments/new',
+            element: (
+              <ProtectedRoute requiredPermissions={['enrollments.manage']}>
+                <EnrollmentRegistrationPage />
+              </ProtectedRoute>
+            ),
+            handle: { title: 'Add enrollment', requiredPermissions: ['enrollments.manage'] } satisfies RouteHandle,
+          },
+          {
+            path: 'app/enrollments/:enrollmentId',
+            element: (
+              <ProtectedRoute requiredPermissions={['enrollments.read']}>
+                <EnrollmentDetailPage />
+              </ProtectedRoute>
+            ),
+            handle: { title: 'Enrollment profile', requiredPermissions: ['enrollments.read'] } satisfies RouteHandle,
+          },
+          {
+            path: 'app/enrollments/:enrollmentId/edit',
+            element: (
+              <ProtectedRoute requiredPermissions={['enrollments.manage']}>
+                <EnrollmentEditPage />
+              </ProtectedRoute>
+            ),
+            handle: { title: 'Edit enrollment', requiredPermissions: ['enrollments.manage'] } satisfies RouteHandle,
           },
           ...moduleRouteObjects,
           {

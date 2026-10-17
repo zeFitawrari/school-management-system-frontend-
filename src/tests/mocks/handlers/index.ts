@@ -9,6 +9,7 @@ import { courseHandlers } from '@/tests/mocks/handlers/courses';
 import { curriculumHandlers } from '@/tests/mocks/handlers/curriculum';
 import { packageHandlers } from '@/tests/mocks/handlers/packages';
 import { groupHandlers } from '@/tests/mocks/handlers/groups';
+import { enrollmentHandlers } from '@/tests/mocks/handlers/enrollments';
 
 /**
  * Request handlers follow docs/api-contract.md. One file per domain; domains
@@ -26,4 +27,5 @@ export const handlers = [
   ...curriculumHandlers,
   ...packageHandlers,
   ...groupHandlers,
+  ...enrollmentHandlers,
 ];
