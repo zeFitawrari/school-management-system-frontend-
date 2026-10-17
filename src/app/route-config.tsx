@@ -8,6 +8,7 @@ import { LoginPage, ProtectedRoute } from '@/features/auth';
 import { ParentDetailPage, ParentEditPage, ParentListPage, ParentRegistrationPage } from '@/features/parents';
 import { StudentListPage, StudentRegistrationPage, StudentDetailPage } from '@/features/students';
 import { TutorDetailPage, TutorEditPage, TutorListPage, TutorRegistrationPage } from '@/features/tutors';
+import { VacancyDetailPage, VacancyEditPage, VacancyListPage, VacancyRegistrationPage } from '@/features/vacancies';
 import { UserListPage } from '@/features/users';
 import { DashboardLayout } from '@/layouts/DashboardLayout';
 import type { RouteObject } from 'react-router-dom';
@@ -33,7 +34,6 @@ const PlaceholderPage = lazy(() => import('@/app/RoutePlaceholder'));
 const moduleRoutes: ModuleRoute[] = [
   { path: 'app/dashboard', title: 'Dashboard', requiredPermissions: ['dashboard.read'] },
   // { path: 'app/students', title: 'Students', requiredPermissions: ['students.read'] },
-  { path: 'app/vacancies', title: 'Vacancies', requiredPermissions: ['vacancies.read'] },
   { path: 'app/courses', title: 'Courses', requiredPermissions: ['courses.read'] },
   { path: 'app/curriculum', title: 'Curriculum', requiredPermissions: ['courses.read'] },
   { path: 'app/groups', title: 'Groups', requiredPermissions: ['groups.read'] },
@@ -213,6 +213,42 @@ export const appRoutes: RouteObject[] = [
               </ProtectedRoute>
             ),
             handle: { title: 'Edit tutor', requiredPermissions: ['tutors.update'] } satisfies RouteHandle,
+          },
+          {
+            path: 'app/vacancies',
+            element: (
+              <ProtectedRoute requiredPermissions={['vacancies.read']}>
+                <VacancyListPage />
+              </ProtectedRoute>
+            ),
+            handle: { title: 'Vacancies', requiredPermissions: ['vacancies.read'] } satisfies RouteHandle,
+          },
+          {
+            path: 'app/vacancies/new',
+            element: (
+              <ProtectedRoute requiredPermissions={['vacancies.manage']}>
+                <VacancyRegistrationPage />
+              </ProtectedRoute>
+            ),
+            handle: { title: 'Add vacancy', requiredPermissions: ['vacancies.manage'] } satisfies RouteHandle,
+          },
+          {
+            path: 'app/vacancies/:vacancyId',
+            element: (
+              <ProtectedRoute requiredPermissions={['vacancies.read']}>
+                <VacancyDetailPage />
+              </ProtectedRoute>
+            ),
+            handle: { title: 'Vacancy profile', requiredPermissions: ['vacancies.read'] } satisfies RouteHandle,
+          },
+          {
+            path: 'app/vacancies/:vacancyId/edit',
+            element: (
+              <ProtectedRoute requiredPermissions={['vacancies.manage']}>
+                <VacancyEditPage />
+              </ProtectedRoute>
+            ),
+            handle: { title: 'Edit vacancy', requiredPermissions: ['vacancies.manage'] } satisfies RouteHandle,
           },
           ...moduleRouteObjects,
           {
