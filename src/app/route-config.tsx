@@ -9,6 +9,7 @@ import { ParentDetailPage, ParentEditPage, ParentListPage, ParentRegistrationPag
 import { StudentListPage, StudentRegistrationPage, StudentDetailPage } from '@/features/students';
 import { TutorDetailPage, TutorEditPage, TutorListPage, TutorRegistrationPage } from '@/features/tutors';
 import { VacancyDetailPage, VacancyEditPage, VacancyListPage, VacancyRegistrationPage } from '@/features/vacancies';
+import { AcademicYearDetailPage, AcademicYearEditPage, AcademicYearListPage, AcademicYearRegistrationPage } from '@/features/academic-years';
 import { UserListPage } from '@/features/users';
 import { DashboardLayout } from '@/layouts/DashboardLayout';
 import type { RouteObject } from 'react-router-dom';
@@ -249,6 +250,42 @@ export const appRoutes: RouteObject[] = [
               </ProtectedRoute>
             ),
             handle: { title: 'Edit vacancy', requiredPermissions: ['vacancies.manage'] } satisfies RouteHandle,
+          },
+          {
+            path: 'app/academic-years',
+            element: (
+              <ProtectedRoute requiredPermissions={['academics.years.manage']}>
+                <AcademicYearListPage />
+              </ProtectedRoute>
+            ),
+            handle: { title: 'Academic Years', requiredPermissions: ['academics.years.manage'] } satisfies RouteHandle,
+          },
+          {
+            path: 'app/academic-years/new',
+            element: (
+              <ProtectedRoute requiredPermissions={['academics.years.manage']}>
+                <AcademicYearRegistrationPage />
+              </ProtectedRoute>
+            ),
+            handle: { title: 'Add academic year', requiredPermissions: ['academics.years.manage'] } satisfies RouteHandle,
+          },
+          {
+            path: 'app/academic-years/:academicYearId',
+            element: (
+              <ProtectedRoute requiredPermissions={['academics.years.manage']}>
+                <AcademicYearDetailPage />
+              </ProtectedRoute>
+            ),
+            handle: { title: 'Academic year profile', requiredPermissions: ['academics.years.manage'] } satisfies RouteHandle,
+          },
+          {
+            path: 'app/academic-years/:academicYearId/edit',
+            element: (
+              <ProtectedRoute requiredPermissions={['academics.years.manage']}>
+                <AcademicYearEditPage />
+              </ProtectedRoute>
+            ),
+            handle: { title: 'Edit academic year', requiredPermissions: ['academics.years.manage'] } satisfies RouteHandle,
           },
           ...moduleRouteObjects,
           {
